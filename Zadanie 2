@@ -1,3 +1,8 @@
+/*
+W kodzie wykorzystane są dwie pętle. Pierwsza z nich wyświetla sumę dwóch pierwszych elementów, którymi są 0 i 1. 
+Kolejna pętla obejmuje elementy następujące, obliczając i wyświetlając sumę dwóch poprzednich wyrazów.
+Funkcja ta jest obliczana dla podanej na początku liczby elementów oraz wyświetlany jest czas wywołania funkcji.
+*/
 import java.util.Scanner;
 
 public class zadanie2 {
@@ -5,6 +10,7 @@ public class zadanie2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner user = new Scanner(System.in);
+		
 		System.out.println("Podaj liczbę elementów:  ");
 		int n = user.nextInt();
 		int tablica [] = new int [n];
@@ -28,3 +34,33 @@ public class zadanie2 {
 	
 }
 }
+// Pierwszym rozwiązaniem jest wywołanie funkcji dla 5 elementów.
+/*
+Oczekiwany wynik zwrócony przez wywołanie funkcji:
+Podaj liczbę elementów:  
+5
+0
+1
+1
+2
+3
+Czas wywolania funkcji wynosi: 0.01 ms
+*/
+// Drugim rozwiązaniem jest wywołanie funkcji dla 11 elementów.
+/*
+Oczekiwany wynik zwrócony przez wywołanie funkcji:
+Podaj liczbę elementów:  
+11
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+Czas wywolania funkcji wynosi: 0.01 ms
+*/
