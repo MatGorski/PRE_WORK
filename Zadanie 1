@@ -1,3 +1,10 @@
+/*
+W kodzie wykorzystana jest pętla, która określa liczbę otzrymywanych elementów. 
+W pętli losowane są wartości miesiąca, dnia i dnia tygodnia.Do wylosowanych wartości dnia tygodnia przypisane są ich nazwy.
+Użytkownik wprowadza rok początkowy i końcowy i ilość dat, które chce wyświetlić. Program losuje rok z podanego przedziału, a następnie
+dopisuje do niego losowy miesiąc i dzień.
+*/
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -57,3 +64,20 @@ public class zadanie1 {
 	
 }
 }
+
+// Rozwiązaniem jest wywołanie funkcji dla 5 elementów.
+/*
+Oczekiwany wynik zwrócony przez wywołanie funkcji:
+Podaj rok początkowy: 
+2002
+Podaj rok końcowy: 
+2008
+Podaj liczbę elementów:  
+5
+Piątek, 2003, 4, 9
+Środa, 2003, 12, 14
+Niedziela, 2007, 5, 24
+Środa, 2005, 4, 11
+Wtorek, 2003, 11, 30
+
+
