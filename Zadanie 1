@@ -1,83 +1,61 @@
 /*
-W kodzie wykorzystana jest pętla, która określa liczbę otzrymywanych elementów. 
-W pętli losowane są wartości miesiąca, dnia i dnia tygodnia.Do wylosowanych wartości dnia tygodnia przypisane są ich nazwy.
-Użytkownik wprowadza rok początkowy i końcowy i ilość dat, które chce wyświetlić. Program losuje rok z podanego przedziału, a następnie
-dopisuje do niego losowy miesiąc i dzień.
+W kodzie podane są dwie daty, końcowa i początkowa. Użytkownik podaje ilość dat, które program ma wylosować. Na początku odbywa się wpisanie
+losowych dat w formie milisekund do tablicy(losowanie liczby z przedziału pd zera do daty końcowej w milisekundach powtarzane tyle razy, ile
+wynosi podana ilość elementów).Następnym krokiem jest stworzenie drugiej tablicy, w, której będą zawarte zadane informacje. Ilość dni 
+to przypisanie wylosowanych wartości w milisekundach i podzielenie ich prze milisekundy w dniu. Ilość miesięcy jest uzyskiwana za pomocą 
+dzielenia liczby dni przez 30.(program zakłada, że każdy miesiąc ma 30 dni). Kolejnym krokiem jest ustalenie instrukcji warunkowych, w 
+przypadku roku jeżeli liczba miesięcy jest mniejsza od 12 to wpisywany jest aktualny rok, w przeciwnym wypadku dodawana jest zakrąglona
+liczba lat uzyskana poprzez podzielenie miesiecy przez 12. W przypadku liczby dni instrukcja warunkowa przebiega tak, że jeżeli liczba 
+lat i miesiecy jest mniejsza od 1 wtedy jest wpisywany numer dnia, gdy większy wtedy od ilości dni odejmowany jest lioczyn dni w miesiacu
+i liczby miesiecy.Na zakończenie tworzona jest wylosowana data, a następnie otrzymane wartości dnia, miesiaca i roku są wpisywane 
+do tablicy.
 */
 
-import java.util.Random;
-import java.util.Scanner;
+let poczatek = new Date('2019-01-01');
+let koniec = new Date('2030-03-01');
+const ilosc_elementow = prompt("Podaj ilosć elementów");
 
-public class zadanie1 {
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner user = new Scanner(System.in);
-		System.out.println("Podaj rok początkowy: ");
-		int rokp = user.nextInt();
-		System.out.println("Podaj rok końcowy: ");
-		int rokk = user.nextInt();
-		System.out.println("Podaj liczbę elementów:  ");
-		
-		int n = user.nextInt();
-		int tablica [] = new int [n];
-		double max = rokk;
-		double min = rokp;
-		double zakres = rokk-rokp+1;
-		Random rand = new Random();
-		
-		
-		
-		
-		for (int i=0; i<tablica.length; i++)
-		{
-			
-			int rok = (int) ((int) (Math.random()*zakres) + min);
-						
-			int miesiac = rand.nextInt(12)+1;
-			int dzien = rand.nextInt(30)+1;
-			int dzient = rand.nextInt(7)+1;
-			
-		
-			if (dzient==0)
-				System.out.println("Poniedziałek"+", "+rok+", "+miesiac+", "+dzien);
-			if(dzient==1)
-				System.out.println("Wtorek"+", "+rok+", "+miesiac+", "+dzien);
-			if (dzient==2)
-				System.out.println("Środa"+", "+rok+", "+miesiac+", "+dzien);
-			if(dzient==3)
-				System.out.println("Czwartek"+", "+rok+", "+miesiac+", "+dzien);
-			if (dzient==4)
-				System.out.println("Piątek"+", "+rok+", "+miesiac+", "+dzien);
-			if(dzient==5)
-				System.out.println("Sobota"+", "+rok+", "+miesiac+", "+dzien);
-			if (dzient==6)
-				System.out.println("Niedziela"+", "+rok+", "+miesiac+", "+dzien);
-			
-			
-					
-			
-		}
-		
-		
-		 
-	
-}
+
+const zadanie1 = (poczatek, koniec, n) => {
+// wstępne zmienne
+  const tablica = []; 
+  const tablica2 = [];
+  const dni = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+  const miesiace = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+  const czas_z_przedzialu = koniec.getTime() - poczatek.getTime();
+  
+  // wpisanie n czasów do tablicy:
+  for(let i = 0; i < n; i++) {
+  	tablica.push(Math.floor(Math.random()*czas_z_przedzialu));
+  }
+  
+   // wypełnienie tablicy2 obiektami zawierajacymi dzien, miesiac i rok w liczbach:
+  for(let i = 0; i < n; i++) {
+    ilosc_dni = Math.floor(tablica[i] / (1000*60*60*24));
+    ilosc_miesiecy = Math.floor(ilosc_dni/30);
+    miesiac = poczatek.getUTCMonth() + (ilosc_miesiecy < 12 ? ilosc_miesiecy : Math.floor(ilosc_miesiecy/12));
+    rok = poczatek.getFullYear() + (ilosc_miesiecy < 12 ? 0 : Math.floor(ilosc_miesiecy/12));
+    dzien = poczatek.getUTCDate() + ((miesiac < 1 && rok < 1) ? ilosc_dni : ilosc_dni-(30*ilosc_miesiecy));
+    
+    // utworzenie wylosowanej daty i pushowanie jej do tablicy
+    wylosowana_data = new Date(rok, miesiac-1, dzien);
+    tablica2.push(
+    `${dni[wylosowana_data.getDay()]}, ${rok}, ${miesiace[wylosowana_data.getMonth()]}, ${dzien}`
+    )
+  }
+
+  return tablica2;
 }
 
-// Rozwiązaniem jest wywołanie funkcji dla 5 elementów.
+zadanie1(poczatek, koniec, ilosc_elementow);
+
+// Rozwiązaniem jest wywołanie funkcji dla 6 elementów.
 /*
 Oczekiwany wynik zwrócony przez wywołanie funkcji:
-Podaj rok początkowy: 
-2002
-Podaj rok końcowy: 
-2008
-Podaj liczbę elementów:  
-5
-Piątek, 2003, 4, 9
-Środa, 2003, 12, 14
-Niedziela, 2007, 5, 24
-Środa, 2005, 4, 11
-Wtorek, 2003, 11, 30
-
-
+Wtorek, 2023, Kwiecień, 10
+Środa, 2022, Marzec, 1
+Poniedziałek, 2022, Marzec, 13
+Środa, 2025, Czerwiec, 3
+Czwartek, 2027, Sierpień, 18
+Poniedziałek, 2020, Styczeń, 12
+*/
