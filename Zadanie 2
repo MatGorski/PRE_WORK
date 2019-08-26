@@ -12,23 +12,23 @@ public class zadanie2 {
 		Scanner user = new Scanner(System.in);
 		
 		System.out.println("Podaj liczbę elementów:  ");
-		int n = user.nextInt();
-		int tablica [] = new int [n];
+		var n = user.nextInt();
+		var tablica [] = new var [n];
 		tablica[0] = 0;
 		tablica[1] = 1;
-		long czasRozpoczecia = System.currentTimeMillis();
-		for (int k = 0; k<2; k++)
+		var czasRozpoczecia = System.currentTimeMillis();
+		for (var k = 0; k<2; k++)
 		{
 			System.out.println(tablica[k]);
 		}
-		for(int i = 2; i<tablica.length; i++ ) 
+		for(var i = 2; i<tablica.length; i++ ) 
 		{
 			tablica[i] = tablica[i-1]+ tablica[i-2];
 			System.out.println(tablica[i]);
 		
 		}
-		 long czasZakonczenia = System.currentTimeMillis();
-		 long czasTrwania = czasZakonczenia - czasRozpoczecia;
+		 var czasZakonczenia = System.currentTimeMillis();
+		 var czasTrwania = czasZakonczenia - czasRozpoczecia;
 		 System.out.println("Czas wywolania funkcji wynosi: 0.0" + czasTrwania + " ms");
 	
 	
