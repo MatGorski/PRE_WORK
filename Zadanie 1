@@ -7,7 +7,9 @@ dzielenia liczby dni przez 30.(program zakłada, że każdy miesiąc ma 30 dni).
 przypadku roku jeżeli liczba miesięcy jest mniejsza od 12 to wpisywany jest aktualny rok, w przeciwnym wypadku dodawana jest zakrąglona
 liczba lat uzyskana poprzez podzielenie miesiecy przez 12. W przypadku liczby dni instrukcja warunkowa przebiega tak, że jeżeli liczba 
 lat i miesiecy jest mniejsza od 1 wtedy jest wpisywany numer dnia, gdy większy wtedy od ilości dni odejmowany jest lioczyn dni w miesiacu
-i liczby miesiecy.Na zakończenie tworzona jest wylosowana data, a następnie otrzymane wartości dnia, miesiaca i roku są wpisywane 
+i liczby miesiecy.Dla ustalanego miesiąca ustalay jest warunek, który przy nie uzyskaniu dzielenia przez 12 reszty 0 dokonuje działań
+w celu doprowadzenia do takiej wartości, która pozwala na określenie dokładnego miesiąca.
+Na zakończenie tworzona jest wylosowana data, a następnie otrzymane wartości dnia, miesiaca i roku są wpisywane 
 do tablicy.
 */
 
@@ -33,9 +35,11 @@ const zadanie1 = (poczatek, koniec, n) => {
   for(let i = 0; i < n; i++) {
     ilosc_dni = Math.floor(tablica[i] / (1000*60*60*24));
     ilosc_miesiecy = Math.floor(ilosc_dni/30);
-    miesiac = poczatek.getUTCMonth() + (ilosc_miesiecy < 12 ? ilosc_miesiecy : Math.floor(ilosc_miesiecy/12));
+    warunek = ilosc_miesiecy % 12 === 0 ? 0 : Math.floor(((ilosc_miesiecy/12) - Math.floor(ilosc_miesiecy/12))*10)+1;
+    
     rok = poczatek.getFullYear() + (ilosc_miesiecy < 12 ? 0 : Math.floor(ilosc_miesiecy/12));
-    dzien = poczatek.getUTCDate() + ((miesiac < 1 && rok < 1) ? ilosc_dni : ilosc_dni-(30*ilosc_miesiecy));
+    miesiac = poczatek.getUTCMonth() + (ilosc_miesiecy < 12 ? ilosc_miesiecy : warunek);
+    dzien = poczatek.getUTCDate() + (miesiac < 1  ? ilosc_dni : ilosc_dni-(30*ilosc_miesiecy));
     
     // utworzenie wylosowanej daty i pushowanie jej do tablicy
     wylosowana_data = new Date(rok, miesiac-1, dzien);
@@ -47,7 +51,7 @@ const zadanie1 = (poczatek, koniec, n) => {
   return tablica2;
 }
 
-zadanie1(poczatek, koniec, ilosc_elementow);
+
 
 // Rozwiązaniem jest wywołanie funkcji dla 6 elementów.
 /*
