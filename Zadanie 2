@@ -7,15 +7,15 @@ const zadanie2 = (n) => {
   const poczatek = performance.now();
   const tablica = [];
   tablica.length = n;
-  tablica[0] = 0;
-  tablica[1] = 1;
 
-  for(let k = 0; k < 2; k ++) {
-    console.log(tablica[k]);
-  }
-
-  for(let i = 2; i < tablica.length; i++) {
-    tablica[i] = tablica[i-1] + tablica[i-2];
+  for(let i = 0; i < tablica.length; i++) {
+  	if(i === 0) {
+    	tablica[i] = 0;
+    } else if(i===1) {
+    	tablica[i] = 1;
+    } else {
+    	tablica[i] = tablica[i-1] + tablica[i-2];
+    }
     console.log(tablica[i]);
   }
 	const koniec = performance.now();
